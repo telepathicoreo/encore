@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encore — Music Career RPG Prototype</title>
+<style>
+:root{--bg:#0d1517;--panel:#152225;--panel2:#1b2c2f;--line:#2c4143;--text:#edf5f1;--muted:#9eb4ad;--green:#72e0ad;--mint:#b3f4d2;--gold:#f4c76b;--red:#ff8c86;--blue:#8dc9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% -10%,#1d3b38 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:1px solid #41635a;background:#244d40;color:#eafff3;border-radius:10px;padding:10px 13px;font-weight:700;transition:.15s}button:hover{filter:brightness(1.13);transform:translateY(-1px)}button:disabled{opacity:.38;cursor:not-allowed;transform:none}button.secondary{background:#202f32;border-color:var(--line);color:var(--text)}button.gold{background:#604d25;border-color:#91743c;color:#fff0c5}.wrap{max-width:1180px;margin:auto;padding:24px 18px 48px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#9cf2c5,#398c6d);display:grid;place-items:center;color:#0d251d;font-size:25px;font-weight:900;box-shadow:0 8px 24px #0004}.brand h1{font-size:25px;letter-spacing:1px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px;letter-spacing:1.7px;text-transform:uppercase}.top-right{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.pill{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#142022;color:var(--muted);font-size:13px}.pill strong{color:var(--text)}.hero{display:grid;grid-template-columns:1.45fr .8fr;gap:16px;margin-bottom:16px}.hero-main{border:1px solid var(--line);border-radius:18px;padding:24px;background:linear-gradient(120deg,#1a3431,#182629 68%);position:relative;overflow:hidden;min-height:185px}.hero-main:after{content:"♫";position:absolute;right:25px;top:-45px;font-size:220px;line-height:1;color:#a2f2cc0b;pointer-events:none}.eyebrow{font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:2px;font-weight:800}.hero h2{font-size:clamp(25px,4vw,38px);line-height:1.1;margin:9px 0 10px;max-width:560px}.hero p{max-width:600px;color:#b4c9c1;margin:0 0 16px}.profile{border:1px solid var(--line);border-radius:18px;padding:21px;background:var(--panel)}.profile-head{display:flex;align-items:center;gap:12px;margin-bottom:15px}.avatar{width:45px;height:45px;border-radius:50%;display:grid;place-items:center;background:#2a5144;font-size:21px}.profile h3{margin:0;font-size:17px}.profile small{color:var(--muted)}.xp-line,.meter{height:8px;border-radius:99px;background:#293a3b;overflow:hidden}.xp-line span,.meter span{display:block;height:100%;border-radius:99px;transition:width .2s}.xp-line span{background:var(--gold)}.xp-label{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:8px 0 5px}.resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}.resource{border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:18px}.res-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.res-name{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px}.res-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#264238;color:var(--green);font-size:18px}.resource.creativity .res-icon{background:#4a3b23;color:var(--gold)}.resource.inspiration .res-icon{background:#3d315c;color:#d9baff}.meter.inspire span{background:linear-gradient(90deg,#9272d7,#d9baff)}.amount{font-size:22px;font-weight:850;font-variant-numeric:tabular-nums}.meter{margin:12px 0 8px;height:9px}.meter.tech span{background:linear-gradient(90deg,#3caa7a,var(--green))}.meter.creative span{background:linear-gradient(90deg,#c58b36,var(--gold))}.res-foot{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:26px 0 13px}.section-head h2{margin:0;font-size:21px}.section-head p{margin:3px 0 0;color:var(--muted);font-size:13px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{background:transparent;border-color:var(--line);color:var(--muted)}.tab.active{background:#244d40;border-color:#4b8d70;color:#eafff3}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{border:1px solid var(--line);background:var(--panel);border-radius:15px;padding:16px}.stat-top{display:flex;justify-content:space-between;align-items:center;gap:6px}.stat h3{font-size:14px;margin:0}.stat .symbol{color:var(--green);font-size:19px}.stat-num{font-size:29px;font-weight:850;margin:12px 0 2px;font-variant-numeric:tabular-nums}.stat small{color:var(--muted)}.stat .meter{margin:12px 0 14px}.stat button{width:100%;font-size:13px;padding:9px}.stat-desc{color:var(--muted);font-size:12px;min-height:35px;margin-top:5px}.activity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.activity{border:1px solid var(--line);border-radius:15px;padding:17px;background:linear-gradient(135deg,#19292b,#142022);display:flex;flex-direction:column;gap:10px}.activity-top{display:flex;gap:12px;align-items:start}.activity-icon{width:43px;height:43px;flex:0 0 43px;border-radius:12px;display:grid;place-items:center;background:#29493e;font-size:21px}.activity h3{margin:0 0 3px;font-size:16px}.activity p{margin:0;color:var(--muted);font-size:13px}.level{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:850}.activity-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:8px}.reward{font-size:12px;color:#c7d8d1;line-height:1.6}.reward b{color:var(--gold)}.activity button{white-space:nowrap}.locked{opacity:.5}.log{border:1px solid var(--line);border-radius:15px;background:#111c1e;overflow:hidden}.log-head{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.log-head h3{margin:0;font-size:15px}.log-list{padding:0 16px;max-height:230px;overflow:auto}.log-item{padding:11px 0;border-bottom:1px solid #253536;display:flex;gap:10px;font-size:13px}.log-item:last-child{border-bottom:0}.log-time{color:#78938a;white-space:nowrap;font-variant-numeric:tabular-nums}.log-message{color:#d8e7e0}.log-message strong{color:var(--green)}.footer{margin-top:22px;text-align:center;color:#6f8880;font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#e0ffed;color:#103326;padding:12px 18px;border-radius:12px;font-weight:800;box-shadow:0 8px 30px #0007;opacity:0;pointer-events:none;transition:.2s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}.city-districts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.district{padding:17px;text-align:left;min-height:138px;background:linear-gradient(145deg,#203b36,#182528);border:1px solid var(--line);border-radius:15px}.district.selected{border-color:var(--green);box-shadow:inset 0 0 0 1px #76d6aa}.district .emoji{font-size:30px;display:block;margin-bottom:9px}.district small{display:block;color:var(--muted);font-weight:400;margin-top:7px;line-height:1.45}.city-locations{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 17px}.city-shop{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:20px}.city-shop h3{margin:0 0 7px}.city-products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px}@media(max-width:800px){.city-districts{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:540px){.city-products{grid-template-columns:1fr}}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.activity-grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.resources{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.hero-main{min-height:0}}
+@media(max-width:450px){.wrap{padding:15px 12px 35px}.resources{grid-template-columns:1fr}.grid{gap:8px}.stat{padding:12px}.stat-num{font-size:25px}.activity-bottom{align-items:flex-start;flex-direction:column}.activity button{width:100%}.brand h1{font-size:22px}}
+.city-view-switch{display:flex;gap:8px;margin:14px 0}.city-map{position:relative;width:100%;aspect-ratio:1000/650;min-height:360px;overflow:hidden;border:2px solid #567c70;border-radius:18px;background:#8eaf91;margin:14px 0;isolation:isolate}.city-map svg{position:absolute;inset:0;width:100%;height:100%;display:block}.map-landmark{position:absolute;transform:translate(-50%,-100%);z-index:3;background:#153a32ed;border:1px solid #d0e9d0;color:#fff;padding:5px 8px;border-radius:9px;font-size:clamp(10px,1.25vw,13px);font-weight:650;white-space:nowrap;box-shadow:0 3px 8px #102a2855;cursor:pointer}.map-landmark:hover,.map-landmark.active{background:#d4eab7;color:#17382c;border-color:#1c4938;z-index:5}.map-landmark:after{content:"";position:absolute;top:100%;left:50%;border:6px solid transparent;border-top-color:#153a32;transform:translateX(-50%)}.map-landmark.active:after,.map-landmark:hover:after{border-top-color:#d4eab7}.map-district-label{position:absolute;z-index:2;pointer-events:none;font-size:clamp(10px,1.5vw,17px);font-weight:900;letter-spacing:.07em;text-shadow:0 2px 5px #fff,0 0 8px #fff;color:#274e41}.map-find{position:absolute;z-index:6;left:51%;top:49%;transform:translate(-50%,-50%);border:2px solid #fff2b0;background:#9b6620;color:white;box-shadow:0 0 20px #edc8699a;animation:findpulse 2s infinite}.map-find:disabled{opacity:1}@keyframes findpulse{50%{box-shadow:0 0 30px #edc869}}.map-key{font-size:12px;color:var(--muted);margin:8px 0}.city-map .map-landmark:focus-visible{outline:3px solid #ffed8a;outline-offset:3px}@media(max-width:650px){.city-map{aspect-ratio: 1000/850;min-height:430px}.map-landmark{font-size:10px;padding:4px 5px}.map-district-label{font-size:11px}}.city-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.city-list-group{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px}.city-list-group h3{margin:0 0 10px;font-size:15px}.city-list-group button{display:block;width:100%;margin:5px 0;text-align:left}.city-note{color:var(--muted);font-size:12px;margin:8px 0 14px}@media(max-width:650px){.city-map{min-height:570px}.map-zone.music{left:3%;top:3%;width:44%;height:42%}.map-zone.nightlife{right:3%;top:3%;width:44%;height:42%}.map-zone.studio{left:3%;bottom:3%;width:44%;height:42%}.map-zone.arts{right:3%;bottom:3%;width:44%;height:42%}.map-pin{font-size:11px;padding:6px}.city-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">♫</div><div><h1>ENCORE</h1><p>Your music career starts here</p></div></div>
+    <div class="top-right"><span class="pill">💵 <strong id="cash">$500</strong></span><span class="pill">⭐ <strong id="rep">0</strong> reputation</span></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-main">
+      <div class="eyebrow">Independent artist · Level <span id="heroLevel">1</span></div>
+      <h2>Every legend starts with a first note.</h2>
+      <p>Practice your craft, take your first gigs, and turn raw talent into a music career. Your next big break starts with what you do today.</p>
+      <button onclick="showSection('activities')">Find your next gig ↗</button>
+    </div>
+    <aside class="profile">
+      <div class="profile-head"><div class="avatar">🎸</div><div><h3 id="artistName">New Artist</h3><small id="careerTitle">Bedroom Musician</small></div></div>
+      <div class="xp-label"><span>Career experience</span><span><b id="xpText">0 / 100 XP</b></span></div>
+      <div class="xp-line"><span id="xpBar" style="width:0%"></span></div>
+      <div class="xp-label" style="margin-top:14px"><span>Career level</span><span id="levelText">Level 1</span></div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Earn XP from practice and gigs to level up and improve your odds at ambitious opportunities.</p>
+    </aside>
+  </section>
+
+  <section class="resources">
+    <div class="resource">
+      <div class="res-top"><div class="res-name"><span class="res-icon">⚡</span> Technique</div><div class="amount"><span id="tech">100</span><span style="color:var(--muted);font-size:14px"> / 100</span></div></div>
+      <div class="meter tech"><span id="techBar" style="width:100%"></span></div>
+      <div class="res-foot"><span>Practice energy</span><span id="techRegen">Regenerates over time</span></div>
+    </div>
+    <div class="resource creativity">
+      <div class="res-top"><div class="res-name"><span class="res-icon">✨</span> Creativity</div><div class="amount"><span id="creative">25</span><span id="creativeCap" style="font-size:13px;color:var(--muted)"> / 25</span></div></div>
+      <div class="meter creative"><span id="creativeBar" style="width:100%"></span></div>
+      <div class="res-foot"><span>Gig &amp; activity energy</span><span id="creativeRegen">Regenerates over time</span></div>
+    </div>
+    <div class="resource inspiration">
+      <div class="res-top"><div class="res-name"><span class="res-icon">💫</span> Inspiration</div><div class="amount"><span id="inspiration">100</span><span id="inspirationCap" style="color:var(--muted);font-size:14px"> / 1,000</span></div></div>
+      <div class="meter inspire"><span id="inspirationBar" style="width:10%"></span></div>
+      <div class="res-foot"><span>Training effectiveness</span><span id="inspirationRegen">+5 every 5 min</span></div>
+    </div>
+  </section>
+
+  <nav class="tabs" aria-label="Game sections">
+    <button class="tab active" data-section="overview" onclick="showSection('overview')">Overview</button>
+    <button class="tab" data-section="training" onclick="showSection('training')">Training rooms</button>
+    <button class="tab" data-section="items" onclick="showSection('items')">Boosters & items</button>
+    <button class="tab" data-section="activities" onclick="showSection('activities')">Music activities</button>
+    <button class="tab" data-section="city" onclick="showSection('city')">🏙️ City</button>
+    <button class="tab" data-section="account" onclick="showSection('account')">👥 Multiplayer beta</button>
+    <button class="tab" data-section="saves" onclick="showSection('saves')">💾 Save management</button>
+    <button class="tab" data-section="log" onclick="showSection('log')">Career log</button>
+  </nav>
+
+  <main>
+    <section id="overviewSection">
+      <div class="section-head"><div><h2>Your musical stats</h2><p>Four core abilities shape your career. Spend Technique to train them.</p></div><button class="secondary" onclick="showSection('training')">Go train →</button></div>
+      <div class="grid" id="overviewStats"></div>
+      <div class="section-head"><div><h2>Available opportunities</h2><p>Spend Creativity to earn cash, reputation, and career XP.</p></div><button class="secondary" onclick="showSection('activities')">All activities →</button></div>
+      <div class="activity-grid" id="featuredActivities"></div>
+    </section>
+
+    <section id="trainingSection" class="hidden">
+      <div class="section-head"><div><h2>Training rooms</h2><p>Use Technique and Inspiration to sharpen a specific skill. Inspiration determines how much each session improves your stats.</p></div><span class="pill">Cost: <strong>10 Technique + 5 Inspiration</strong> / session</span></div>
+      <div id="facilityPanel" style="margin-bottom:16px"></div>
+      <div class="grid" id="trainingStats"></div>
+      <div style="margin-top:14px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#152225;color:var(--muted);font-size:13px">Training costs 10 Technique and a fixed 5 Inspiration. Every point of Inspiration spent on training counts toward unlocking better practice facilities. Each facility specializes in different stats; upgrade when eligible to unlock a new set of training bonuses. Inspiration regenerates +5 every 5 minutes up to 1,000; boosters can reach 1,500.</div>
+    </section>
+
+    <section id="itemsSection" class="hidden">
+      <div class="section-head"><div><h2>Boosters & items</h2><p>Purchase recovery items with gig earnings, then use them when you need Inspiration. Boosters can exceed the normal 1,000 cap.</p></div><span class="pill">Boosted limit: <strong>1,500</strong></span></div>
+      <div class="activity-grid" id="itemCards"></div><div class="section-head"><div><h2>Found during gigs</h2><p>Keep souvenirs, sell valuables, or use the useful things fans leave behind.</p></div></div><div class="activity-grid" id="foundItemCards"></div>
+      <p style="color:var(--muted);font-size:12px;margin-top:14px">Demo prices and effects are adjustable. Passive recovery stops at 1,000 and never removes Inspiration gained from boosters.</p>
+    </section>
+    <section id="activitiesSection" class="hidden">
+      <div class="section-head"><div><h2>Music activities</h2><p>Every gig is available from the beginning. Your experience, mastery, stats, and Creativity determine your odds. Successful gigs can also reward surprise items.</p></div><span class="pill">Resource: <strong>Creativity</strong></span></div>
+      <div class="activity-grid" id="allActivities"></div>
+    </section>
+
+    <section id="citySection" class="hidden">
+      <div class="section-head"><div><h2>🏙️ Encore City</h2><p>Explore districts, visit shops, and build your musical career.</p></div><span class="pill">Wallet: <strong id="cityCash">$500</strong></span></div>
+      <div class="city-view-switch"><button id="mapViewBtn" onclick="setCityView('map')">🗺️ Map view</button><button id="listViewBtn" class="secondary" onclick="setCityView('list')">☷ All locations</button></div><p class="city-note" id="cityFindNote"></p><div id="cityMapView"></div><div id="cityListView" class="hidden"></div><div class="city-districts" id="cityDistricts"></div>
+      <div id="cityLocation" style="margin-top:18px"></div>
+    </section>
+    <section id="accountSection" class="hidden">
+      <div class="section-head"><div><h2>👥 Encore multiplayer beta</h2><p>Invite-only accounts, cloud saves, and musician profiles. Configure a Supabase project to connect.</p></div><span class="pill" id="cloudIndicator">Offline demo</span></div>
+      <div class="activity" style="margin-bottom:14px"><h3>1 · Connect the beta server</h3><p>Enter the Supabase Project URL and publishable (anon) key from your own project. Never paste a service-role or secret key here. Configuration stays in this browser.</p>
+        <label>Project URL <input id="cloudUrl" type="url" placeholder="https://your-project.supabase.co" style="display:block;width:100%;margin:5px 0 10px;padding:10px;border-radius:8px"></label>
+        <label>Publishable / anon key <input id="cloudKey" type="text" placeholder="sb_publishable_… or anon key" style="display:block;width:100%;margin:5px 0 10px;padding:10px;border-radius:8px"></label>
+        <button onclick="connectCloud()">Connect server</button><span id="cloudConfigStatus" style="margin-left:12px;color:var(--muted)"></span></div>
+      <div class="activity-grid">
+        <div class="activity"><h3>2 · Register or sign in</h3><p>Sign up using the email that received your invitation. Confirm your email if prompted, then sign in.</p>
+          <label>Email <input id="cloudEmail" type="email" autocomplete="email" style="display:block;width:100%;padding:10px;margin:5px 0 10px;border-radius:8px"></label>
+          <label>Password <input id="cloudPassword" type="password" autocomplete="current-password" style="display:block;width:100%;padding:10px;margin:5px 0 10px;border-radius:8px"></label>
+          <div><button onclick="cloudAuth('signup')">Sign up</button> <button class="secondary" onclick="cloudAuth('signin')">Sign in</button> <button class="secondary" onclick="cloudSignOut()">Sign out</button></div>
+        </div>
+        <div class="activity"><h3>3 · Redeem your invitation</h3><p>Your code must match your account email. Only invited accounts can create profiles or save online.</p>
+          <label>Invite code <input id="cloudInvite" autocomplete="off" placeholder="ENCORE-…" style="display:block;width:100%;padding:10px;margin:5px 0 10px;border-radius:8px"></label>
+          <label>Musician username <input id="cloudUsername" maxlength="20" placeholder="3–20 letters, numbers, underscores" style="display:block;width:100%;padding:10px;margin:5px 0 10px;border-radius:8px"></label>
+          <button onclick="redeemInvite()">Join beta</button>
+        </div>
+      </div>
+      <div class="activity" style="margin-top:14px"><h3>Cloud character</h3><p id="cloudAccountStatus">Not signed in. Local gameplay remains available.</p>
+        <div><button onclick="cloudUpload()">Upload current character</button> <button class="secondary" onclick="cloudPrepareDownload()">Load character from cloud</button> <button class="secondary" onclick="cloudListProfiles()">Browse musicians</button></div>
+        <p style="font-size:12px">Turn on automatic cloud saves after confirming this browser has the character you want to keep. Changes upload a few seconds after play; local saves continue even if offline. For another device, load its cloud character before enabling autosave.</p><div style="margin:12px 0"><label><input type="checkbox" id="cloudAutoToggle" onchange="cloudSetAutoSave(this.checked)"> <strong>Automatically save my character to cloud</strong></label><p id="cloudSyncStatus" role="status" style="color:var(--muted);font-size:13px">Automatic cloud saving is off.</p></div>
+        <div id="cloudLoadConfirm" class="hidden" style="border:1px solid var(--gold);padding:12px;border-radius:10px"><strong>Replace this browser's character with the cloud version?</strong><p>Export a backup first if you want to preserve local progress.</p><button onclick="cloudConfirmDownload()">Yes, load cloud character</button> <button class="secondary" onclick="cloudCancelDownload()">Cancel</button></div>
+        <div id="cloudProfiles" style="margin-top:12px"></div>
+        <p id="cloudMessage" role="status" style="color:var(--muted)">The multiplayer beta requires server setup before friends can connect.</p>
+      </div>
+      <p style="color:var(--muted);font-size:12px;margin-top:14px">Beta limitation: training, gigs, and purchases still run in the browser. This is a shared account/profile/cloud-save foundation, not yet a cheat-resistant multiplayer economy or real-time chat.</p>
+    </section>
+    <section id="savesSection" class="hidden">
+      <div class="section-head"><div><h2>💾 Save management</h2><p>Back up your character and transfer progress to future versions of Encore.</p></div><span class="pill">Save format: <strong>v3</strong></span></div>
+      <div class="activity-grid">
+        <div class="activity"><h3>⬇️ Export save</h3><p>Download a portable JSON backup containing your stats, mastery, cash, inventory, facilities, and discoveries.</p><button onclick="exportSave()">Download backup</button></div>
+        <div class="activity"><h3>⬆️ Import save</h3><p>Restore a backup from this or an older compatible prototype. Import replaces the current character; export your current save first.</p><input type="file" id="saveImportFile" accept=".json,application/json" style="max-width:100%;color:var(--muted)"><button onclick="importSave()">Import selected backup</button></div>
+      </div>
+      <div id="importConfirmPanel" class="activity hidden" style="margin-top:14px"><h3>Confirm save import</h3><p id="importConfirmDescription">Replace your current character with the selected backup? Export your current save first if you want to keep it.</p><button type="button" onclick="confirmSaveImport()">Yes, restore this backup</button> <button type="button" class="secondary" onclick="cancelSaveImport()">Cancel</button></div>
+      <p id="saveStatus" style="color:var(--muted);margin-top:16px" role="status">Progress saves automatically in this browser. Download a backup before switching game files or browsers.</p>
+    </section>
+    <section id="logSection" class="hidden">
+      <div class="section-head"><div><h2>Career log</h2><p>A record of your recent practice and performances.</p></div><button class="secondary" onclick="clearLog()">Clear log</button></div>
+      <div class="log"><div class="log-head"><h3>Recent activity</h3><span class="pill" id="logCount">0 events</span></div><div class="log-list" id="logList"></div></div>
+    </section>
+  </main>
+  <div class="footer">ENCORE PROTOTYPE 0.1 · Demo economy and progression values are placeholders · Auto-save enabled · Export backups in Save management</div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const STAT_INFO = {
+  rhythm:{name:"Rhythm",icon:"🥁",desc:"Timing, pulse, and rhythmic precision."},
+  theory:{name:"Theory",icon:"🎼",desc:"Harmony, scales, chords, and structure."},
+  intonation:{name:"Intonation",icon:"🎤",desc:"Pitch accuracy and tuning control."},
+  musicality:{name:"Musicality",icon:"🎹",desc:"Expression, phrasing, and interpretation."}
+};
+const ACTIVITIES = [
+ {id:"busk",name:"Street Performance",icon:"🪕",tier:"Beginner",desc:"Play a few songs on a busy corner and see who stops to listen.",cost:1,cash:[75,125],rep:[1,3],xp:8,stats:["rhythm","musicality"],level:1},
+ {id:"openmic",name:"Open Mic Night",icon:"🎙️",tier:"Beginner",desc:"Take the stage at a local open mic and win over a small crowd.",cost:3,cash:[140,230],rep:[3,6],xp:16,stats:["intonation","musicality"],level:1},
+ {id:"commission",name:"Songwriting Commission",icon:"✍️",tier:"Intermediate",desc:"Write a custom song for a client with a very specific brief.",cost:5,cash:[250,420],rep:[4,8],xp:24,stats:["theory","musicality"],level:2},
+ {id:"session",name:"Session Musician",icon:"🎚️",tier:"Intermediate",desc:"Record a polished part for another artist's studio track.",cost:6,cash:[320,520],rep:[5,10],xp:30,stats:["rhythm","intonation"],level:3},
+ {id:"wedding",name:"Wedding Gig",icon:"💍",tier:"Professional",desc:"Keep the dance floor moving through a full set of crowd favorites.",cost:8,cash:[500,800],rep:[8,14],xp:42,stats:["rhythm","musicality"],level:4},
+ {id:"headline",name:"Headline a Concert",icon:"🎸",tier:"Professional",desc:"Bring your sound to a bigger venue and make the night memorable.",cost:10,cash:[800,1300],rep:[12,22],xp:60,stats:["intonation","musicality"],level:6}
+];
+const ITEMS=[
+ {id:"coffee",name:"Coffee Break",icon:"☕",desc:"A small pick-me-up after practice.",price:100,restore:50,booster:false},
+ {id:"playlist",name:"Fresh Playlist",icon:"🎧",desc:"Find your groove with new music.",price:350,restore:200,booster:false},
+ {id:"retreat",name:"Creative Retreat",icon:"🏕️",desc:"A powerful Inspiration booster that can push you past the usual cap.",price:1000,restore:500,booster:true}
+];
+const ACTIVITY_DROPS=[
+ {id:"lucky_pick",name:"Lucky Guitar Pick",icon:"🎸",desc:"A fan dropped a lucky pick into your instrument case.",source:"busk",weight:40,kind:"inspiration",amount:25},
+ {id:"coffee_voucher",name:"Café Voucher",icon:"🎟️",desc:"A listener left a voucher for a refreshing drink.",source:"busk",weight:30,kind:"inspiration",amount:75},
+ {id:"crumpled_note",name:"Handwritten Fan Note",icon:"💌",desc:"A heartfelt note that rekindles your creative drive.",source:"openmic",weight:40,kind:"inspiration",amount:60},
+ {id:"backstage_pass",name:"Backstage Pass",icon:"🎫",desc:"A spare pass with collector appeal.",source:"headline",weight:40,kind:"sell",amount:900},
+ {id:"studio_token",name:"Studio Session Token",icon:"🎛️",desc:"A studio credit you can sell to a collector.",source:"session",weight:40,kind:"sell",amount:450},
+ {id:"songbook",name:"Vintage Songbook",icon:"📖",desc:"An unusual find from a songwriting client.",source:"commission",weight:40,kind:"sell",amount:280},
+ {id:"bouquet",name:"Pressed Wedding Flower",icon:"💐",desc:"A keepsake from a memorable performance.",source:"wedding",weight:40,kind:"sell",amount:160},
+ {id:"broken_string",name:"Spare Guitar Strings",icon:"🎶",desc:"Useful supplies tucked into your case after a street set.",source:"busk",weight:30,kind:"sell",amount:70}
+];
+function tryActivityDrop(a,success){
+ // Successful gigs have a 12% chance, unsuccessful gigs a 3% chance.
+ if(Math.random()>=(success?.12:.03))return;
+ const pool=ACTIVITY_DROPS.filter(item=>item.source===a.id);
+ if(!pool.length)return;
+ const total=pool.reduce((n,item)=>n+item.weight,0);let roll=Math.random()*total;
+ const found=pool.find(item=>(roll-=item.weight)<0)||pool[pool.length-1];
+ state.inventory[found.id]=(state.inventory[found.id]||0)+1;
+ addLog(`🎁 ${a.name}: Someone left ${found.name} for you! Check Boosters & items.`);
+ toast(`Found ${found.name}!`);
+}
+function useFoundItem(id){
+ regen();const item=ACTIVITY_DROPS.find(x=>x.id===id);
+ if(!item||!(state.inventory[id]>0))return;
+ if(item.kind==="inspiration"){
+  const before=state.inspiration;state.inspiration=Math.min(INSPIRATION_CAP,state.inspiration+item.amount);
+  if(before===state.inspiration){toast("Inspiration is already full.");return;}
+  addLog(`Used ${item.name}: +${state.inspiration-before} Inspiration.`);
+ }else{state.cash+=item.amount;addLog(`Sold ${item.name} for $${item.amount}.`);}
+ state.inventory[id]--;save();render();toast(item.kind==="sell"?`Sold for $${item.amount}`:`Used ${item.name}!`);
+}
+function foundItemCard(item){const count=state.inventory[item.id]||0;
+ return `<article class="activity"><div class="activity-top"><div class="activity-icon">${item.icon}</div><div><h3>${item.name}</h3><p>${item.desc}</p></div></div><div class="reward">Found through ${ACTIVITIES.find(a=>a.id===item.source)?.name||"music activities"} · Owned: <b>${count}</b><br>${item.kind==="sell"?`Sell value: $${item.amount}`:`Restores ${item.amount} Inspiration (normal cap)`}</div><div class="activity-bottom"><button onclick="useFoundItem('${item.id}')" ${!count||(item.kind==="inspiration"&&state.inspiration>=INSPIRATION_CAP)?"disabled":""}>${item.kind==="sell"?"Sell":"Use"} (${count})</button></div></article>`;
+}
+const CITY_DISTRICTS=[
+ {id:"music",name:"Music Row",icon:"🎸",desc:"Instruments, vintage finds and repairs",places:["emporium","secondhand","repair"]},
+ {id:"nightlife",name:"Entertainment District",icon:"🎤",desc:"Cafés, clubs and live venues",places:["cafe","openmicvenue","concert"]},
+ {id:"studio",name:"Studio Quarter",icon:"🎚️",desc:"Recording rooms and producers",places:["soundlab","exchange"]},
+ {id:"arts",name:"Arts District",icon:"🎼",desc:"Conservatory and music culture",places:["conservatory","library"]}
+];
+const CITY_PLACES={emporium:{name:"Instrument Emporium",icon:"🎸",desc:"Brand-new instruments with dependable training bonuses."},secondhand:{name:"Secondhand Sounds",icon:"🪕",desc:"Affordable used gear for musicians on a budget."},repair:{name:"The Repair Bench",icon:"🔧",desc:"Repairs and customization are coming later."},cafe:{name:"Backstage Café",icon:"☕",desc:"Pick up refreshments and Inspiration boosters."},openmicvenue:{name:"The Open Mic",icon:"🎙️",desc:"The neighborhood's favorite small stage."},concert:{name:"Grand Concert Hall",icon:"🎟️",desc:"A legendary venue for unforgettable shows."},soundlab:{name:"SoundLab Studios",icon:"🎛️",desc:"Recording sessions and production facilities."},exchange:{name:"Producer's Exchange",icon:"🎧",desc:"An upcoming marketplace for studio equipment."},conservatory:{name:"City Conservatory",icon:"🏛️",desc:"Advanced music education and practice."},library:{name:"Music Library",icon:"📚",desc:"Research scores, songs and composers."}};
+const CITY_GEAR=[
+ {id:"metronome",name:"Precision Metronome",icon:"🥁",stat:"rhythm",bonus:.05,price:250},
+ {id:"keyboard",name:"Digital Keyboard",icon:"🎹",stat:"theory",bonus:.08,price:700},
+ {id:"tuner",name:"Studio Tuner",icon:"🎵",stat:"intonation",bonus:.07,price:550},
+ {id:"guitar",name:"Acoustic Guitar",icon:"🎸",stat:"musicality",bonus:.09,price:850},
+ {id:"useddrum",name:"Used Practice Pad",icon:"🥁",stat:"rhythm",bonus:.03,price:120},
+ {id:"usedkeys",name:"Secondhand Keyboard",icon:"🎹",stat:"theory",bonus:.04,price:300}
+];
+let cityDistrict="music",cityPlace="emporium",cityView="map";
+const CITY_FINDS=[{id:"coffee",name:"Coffee Break",icon:"☕"},{id:"playlist",name:"Fresh Playlist",icon:"🎧"},{id:"retreat",name:"Creative Retreat",icon:"🏕️"}];
+function localDay(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
+function ensureCityFind(){const day=localDay();if(state.cityFindDay===day)return;state.cityFindDay=day;state.cityFindCollected=false;const chance=Math.random();state.cityFindItem=chance<.30?CITY_FINDS[Math.floor(Math.random()*CITY_FINDS.length)].id:null;save()}
+function collectCityFind(){ensureCityFind();if(!state.cityFindItem||state.cityFindCollected)return;const item=CITY_FINDS.find(i=>i.id===state.cityFindItem);state.inventory[item.id]=(state.inventory[item.id]||0)+1;state.cityFindCollected=true;addLog(`Found ${item.name} while exploring Encore City!`);save();render();toast(`Found ${item.name}! Check Boosters & items.`)}
+function setCityView(view){cityView=view;renderCity()}
+function cityChoose(id){const d=CITY_DISTRICTS.find(d=>d.places.includes(id));cityDistrict=d.id;cityPlace=id;renderCity();document.getElementById("cityLocation").scrollIntoView({behavior:"smooth",block:"nearest"})}
+
+function visitDistrict(id){cityDistrict=id;cityPlace=CITY_DISTRICTS.find(d=>d.id===id).places[0];renderCity();}
+function visitPlace(id){cityPlace=id;renderCity();}
+function buyGear(id){const g=CITY_GEAR.find(x=>x.id===id);if(!g)return;if(state.gearOwned[id])return toast("You already own this instrument.");if(state.cash<g.price)return toast("Not enough cash.");state.cash-=g.price;state.gearOwned[id]=true;state.equippedGear=id;addLog(`Purchased and equipped ${g.name} for $${g.price}.`);save();render();toast(`Equipped ${g.name}!`);}
+function equipGear(id){if(!state.gearOwned[id])return;state.equippedGear=id;addLog(`Equipped ${CITY_GEAR.find(g=>g.id===id).name}.`);save();render();toast("Instrument equipped!");}
+function cityGearBonus(stat){const g=CITY_GEAR.find(g=>g.id===state.equippedGear);return g&&g.stat===stat?1+g.bonus:1;}
+function cityProductCard(g){const owned=!!state.gearOwned[g.id],equipped=state.equippedGear===g.id;return `<article class="activity"><div class="activity-top"><div class="activity-icon">${g.icon}</div><div><h3>${g.name}</h3><p>+${Math.round(g.bonus*100)}% ${STAT_INFO[g.stat].name} training gains while equipped</p></div></div><div class="activity-bottom"><span class="reward">${owned?"Owned":"$"+fmt(g.price)}</span><button ${equipped||(!owned&&state.cash<g.price)?"disabled":""} onclick="${owned?`equipGear('${g.id}')`:`buyGear('${g.id}')`}">${equipped?"Equipped":owned?"Equip":"Buy & equip"}</button></div></article>`;}
+function renderCity(){ensureCityFind();const district=CITY_DISTRICTS.find(d=>d.id===cityDistrict),place=CITY_PLACES[cityPlace];document.getElementById("cityCash").textContent="$"+fmt(state.cash);
+ document.getElementById("mapViewBtn").className=cityView==="map"?"":"secondary";
+ document.getElementById("listViewBtn").className=cityView==="list"?"":"secondary";
+ document.getElementById("cityMapView").classList.toggle("hidden",cityView!=="map");
+ document.getElementById("cityListView").classList.toggle("hidden",cityView!=="list");
+ const find=state.cityFindItem&&!state.cityFindCollected;
+ document.getElementById("cityFindNote").textContent="Each day there is a 30% chance a free item appears somewhere on the map. Finds reset at local midnight; collected items go to Boosters & items.";
+ const coords={emporium:[17,22],secondhand:[35,33],repair:[27,47],cafe:[70,19],openmicvenue:[84,32],concert:[65,42],soundlab:[19,69],exchange:[37,82],conservatory:[72,71],library:[86,84]};
+ const scenery=`<svg viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="grass" width="44" height="44" patternUnits="userSpaceOnUse"><rect width="44" height="44" fill="#a7c5a2"/><circle cx="12" cy="10" r="3" fill="#7caa84" opacity=".6"/><circle cx="35" cy="29" r="2" fill="#7caa84" opacity=".6"/></pattern><pattern id="roof" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M0 0H26V26H0Z" fill="#d9c5a0"/><path d="M0 13H26M13 0V26" stroke="#c1a883" stroke-width="1"/></pattern></defs><rect width="1000" height="650" fill="url(#grass)"/><path d="M480 -30C550 140 435 205 525 350S550 530 470 690" fill="none" stroke="#4d91a0" stroke-width="92"/><path d="M480 -30C550 140 435 205 525 350S550 530 470 690" fill="none" stroke="#8bc9cf" stroke-width="65"/><g stroke="#e7dfc5" stroke-width="32" fill="none"><path d="M0 125H1000M0 360H1000M0 555H1000M110 0V650M325 0V650M685 0V650M890 0V650"/></g><g stroke="#fff5d8" stroke-width="2" stroke-dasharray="11 12" fill="none" opacity=".8"><path d="M0 125H1000M0 360H1000M0 555H1000M110 0V650M325 0V650M685 0V650M890 0V650"/></g><g fill="url(#roof)" stroke="#897e6d" stroke-width="3"><rect x="143" y="157" width="115" height="95" rx="6"/><rect x="352" y="157" width="68" height="100" rx="6"/><rect x="140" y="403" width="126" height="99" rx="6"/><rect x="350" y="400" width="67" height="108" rx="6"/><rect x="720" y="160" width="124" height="94" rx="6"/><rect x="910" y="160" width="67" height="140" rx="6"/><rect x="725" y="399" width="125" height="108" rx="6"/><rect x="911" y="405" width="63" height="105" rx="6"/></g><g fill="#608e65" stroke="#d9efc7" stroke-width="5"><rect x="15" y="12" width="75" height="87" rx="12"/><rect x="570" y="18" width="92" height="78" rx="12"/><rect x="565" y="575" width="90" height="63" rx="12"/><rect x="18" y="574" width="74" height="63" rx="12"/></g><g fill="#315f47"><circle cx="40" cy="35" r="14"/><circle cx="70" cy="67" r="14"/><circle cx="604" cy="48" r="19"/><circle cx="600" cy="601" r="17"/><circle cx="46" cy="602" r="16"/></g><g fill="#e8cda5" stroke="#ae8d69" stroke-width="3"><rect x="446" y="329" width="100" height="62" rx="7"/><rect x="450" y="90" width="95" height="55" rx="7"/><rect x="443" y="524" width="108" height="55" rx="7"/></g><g fill="#527b69" font-family="system-ui,sans-serif" font-size="15" font-weight="bold" text-anchor="middle"><text x="495" y="318">CENTRAL BRIDGE</text><text x="494" y="77">NORTH BRIDGE</text><text x="496" y="518">SOUTH BRIDGE</text></g></svg>`;
+ document.getElementById("cityMapView").innerHTML=`<div class="city-map" aria-label="Illustrated interactive map of Encore City">${scenery}<span class="map-district-label" style="left:5%;top:4%">🎸 MUSIC ROW</span><span class="map-district-label" style="left:69%;top:4%">🎤 ENTERTAINMENT</span><span class="map-district-label" style="left:5%;top:57%">🎚️ STUDIO QUARTER</span><span class="map-district-label" style="left:70%;top:57%">🎼 ARTS DISTRICT</span>${Object.entries(coords).map(([id,xy])=>`<button class="map-landmark ${cityPlace===id?"active":""}" style="left:${xy[0]}%;top:${xy[1]}%" onclick="cityChoose('${id}')" title="${CITY_PLACES[id].name}">${CITY_PLACES[id].icon} ${CITY_PLACES[id].name}</button>`).join("")}${find?`<button class="map-find" onclick="collectCityFind()" title="Collect today's discovered item">🎁 Found item!</button>`:""}</div><p class="map-key">Select any building to visit it, or switch to All Locations for the directory. ${find?"🎁 A collectible appeared today!":"Watch for daily collectible spawns."}</p>`;
+ document.getElementById("cityListView").innerHTML=`<div class="city-list">${CITY_DISTRICTS.map(d=>`<div class="city-list-group"><h3>${d.icon} ${d.name}</h3>${d.places.map(id=>`<button class="${cityPlace===id?"":"secondary"}" onclick="cityChoose('${id}')">${CITY_PLACES[id].icon} ${CITY_PLACES[id].name}</button>`).join("")}</div>`).join("")}</div>`;
+document.getElementById("cityDistricts").innerHTML=CITY_DISTRICTS.map(d=>`<button class="district ${d.id===cityDistrict?"selected":""}" onclick="visitDistrict('${d.id}')"><span class="emoji">${d.icon}</span>${d.name}<small>${d.desc}</small></button>`).join("");let content="";
+if(cityPlace==="emporium"||cityPlace==="secondhand"){const gear=CITY_GEAR.filter(g=>cityPlace==="emporium"?!g.id.startsWith("used"):g.id.startsWith("used"));content=`<p style="color:var(--muted)">Buy instruments and equip one at a time. Its bonus applies to the matching musical stat when training.</p><div class="city-products">${gear.map(cityProductCard).join("")}</div>`;}
+else if(cityPlace==="cafe")content=`<p style="color:var(--muted)">Stock up on Inspiration recovery items. Purchases are added to your inventory under Boosters & items.</p><div class="city-products">${ITEMS.map(itemCard).join("")}</div>`;
+else if(cityPlace==="openmicvenue"||cityPlace==="concert")content=`<p style="color:var(--muted)">Performances are available in Music Activities. Your stats and mastery determine your odds of success.</p><button onclick="showSection('activities')">Browse music activities →</button>`;
+else content=`<p style="color:var(--muted)">This location is planned for a future update. Explore the functioning shops in Music Row and the Backstage Café for now.</p>`;
+document.getElementById("cityLocation").innerHTML=`<div class="section-head"><div><h2>${district.icon} ${district.name}</h2><p>Choose a location to visit.</p></div></div><div class="city-locations">${district.places.map(id=>`<button class="${id===cityPlace?"":"secondary"}" onclick="visitPlace('${id}')">${CITY_PLACES[id].icon} ${CITY_PLACES[id].name}</button>`).join("")}</div><div class="city-shop"><div class="eyebrow">Currently visiting</div><h3>${place.icon} ${place.name}</h3><p style="color:var(--muted)">${place.desc}</p>${content}</div>`;
+}
+const INSPIRATION_CAP=1000, BOOSTED_CAP=1500;
+const CREATIVITY_TIERS=[{name:"Beginner",xp:0,cap:25},{name:"Developing Musician",xp:150,cap:30},{name:"Amateur Performer",xp:600,cap:35},{name:"Experienced Musician",xp:2000,cap:40},{name:"Professional Musician",xp:6500,cap:50},{name:"Accomplished Artist",xp:20000,cap:60},{name:"Virtuoso",xp:60000,cap:75},{name:"Living Legend",xp:180000,cap:100}];
+const ACTIVITY_CATEGORIES=[{id:"live",name:"Live Performance",icon:"🎤",desc:"Build a following through live shows."},{id:"writing",name:"Songwriting",icon:"✍️",desc:"Compose music for clients and audiences."},{id:"recording",name:"Recording & Studio",icon:"🎚️",desc:"Develop your skills behind the microphone."},{id:"events",name:"Events & Concerts",icon:"🎸",desc:"Deliver memorable professional performances."}];
+const ACTIVITY_CATEGORY={busk:"live",openmic:"live",commission:"writing",session:"recording",wedding:"events",headline:"events"};
+function masteryTier(){let i=0;for(let j=0;j<CREATIVITY_TIERS.length;j++)if(state.musicMasteryXP>=CREATIVITY_TIERS[j].xp)i=j;return i;}
+function creativityCap(){return CREATIVITY_TIERS[masteryTier()].cap;}
+function activityMasteryLevel(id){return Math.min(100,1+Math.floor(Math.sqrt((state.activityMastery[id]||0)/12)));}
+function categoryXP(id){return ACTIVITIES.filter(a=>ACTIVITY_CATEGORY[a.id]===id).reduce((sum,a)=>sum+(state.activityMastery[a.id]||0),0);}
+function categoryLevel(id){return Math.min(100,1+Math.floor(Math.sqrt(categoryXP(id)/25)));}
+function eligibleForMasteryTier(index){if(index<2)return true;const categories=ACTIVITY_CATEGORIES.filter(c=>categoryLevel(c.id)>=Math.max(2,index));return categories.length>=Math.min(3,index-1);}
+function awardMastery(a,success){const gain=success?Math.max(4,Math.round(a.cost*3)):Math.max(1,Math.round(a.cost));state.activityMastery[a.id]=(state.activityMastery[a.id]||0)+gain;state.musicMasteryXP+=gain;const old=state.masteryTier||0;let tier=masteryTier();if(tier>old){state.masteryTier=tier;state.creative=Math.min(creativityCap(),state.creative+5);addLog(`Music Mastery advanced to ${CREATIVITY_TIERS[tier].name}! Maximum Creativity is now ${creativityCap()}.`);toast(`Creativity cap increased to ${creativityCap()}!`);}return gain;}
+function masteryPanel(){const tier=masteryTier(),current=CREATIVITY_TIERS[tier],next=CREATIVITY_TIERS[tier+1];return `<div class="activity" style="margin-bottom:16px"><div class="eyebrow">Overall Music Mastery</div><h3 style="font-size:21px">${current.name} · ${creativityCap()} max Creativity</h3><p>Mastery XP: ${fmt(state.musicMasteryXP)}${next?` / ${fmt(next.xp)} toward ${next.name} (+${next.cap-current.cap} max Creativity)`:' · Maximum tier reached'}</p><div class="meter"><span style="width:${next?Math.min(100,100*(state.musicMasteryXP-current.xp)/(next.xp-current.xp)):100}%;background:var(--gold)"></span></div><p>Each completed activity earns individual mastery and contributes to overall Music Mastery. All activities are available immediately; mastery, career level, musical stats, and Creativity capacity affect your chance of success.</p></div>`;}
+function categoryPanels(){return ACTIVITY_CATEGORIES.map(c=>`<div style="margin-bottom:22px"><div class="section-head"><div><h2>${c.icon} ${c.name}</h2><p>${c.desc} · Category mastery level ${categoryLevel(c.id)} · ${fmt(categoryXP(c.id))} XP</p></div></div><div class="activity-grid">${ACTIVITIES.filter(a=>ACTIVITY_CATEGORY[a.id]===c.id).map(activityCard).join("")}</div></div>`).join("");}
+
+const SAVE_KEY="encore_proto_v1";
+function freshState(){const now=Date.now();return {name:"New Artist",cash:500,rep:0,xp:0,level:1,tech:100,creative:25,musicMasteryXP:0,activityMastery:{},masteryTier:0,inspiration:1000,inventory:{},gearOwned:{},equippedGear:null,inspirationSpentTraining:0,facilityTier:0,stats:{rhythm:1,theory:1,intonation:1,musicality:1},lastTick:now,lastTechTick:now,lastCreativeTick:now,lastInspirationTick:now,log:[{time:now,message:"Welcome to Encore! Your music career begins today."}],completed:{}}}
+let state;
+try{state=JSON.parse(localStorage.getItem(SAVE_KEY))||freshState()}catch(e){state=freshState()}
+// Migrate existing prototype saves to independent resource timers.
+if(!state.lastTechTick)state.lastTechTick=state.lastTick||Date.now();
+if(!state.lastCreativeTick)state.lastCreativeTick=state.lastTick||Date.now();
+if(typeof state.inspiration!=="number")state.inspiration=1000;
+// One-time migration: start this updated version with a full Inspiration bar.
+if(!state.inspirationFullStartV2){state.inspiration=Math.max(1000,state.inspiration);state.inspirationFullStartV2=true;state.lastInspirationTick=Date.now();}
+if(!state.inventory||typeof state.inventory!=="object")state.inventory={};
+if(!state.gearOwned||typeof state.gearOwned!=="object")state.gearOwned={};
+if(!("equippedGear" in state))state.equippedGear=null;
+if(!Number.isFinite(state.inspirationSpentTraining))state.inspirationSpentTraining=0;
+if(!Number.isInteger(state.facilityTier))state.facilityTier=0;
+if(!state.lastInspirationTick)state.lastInspirationTick=state.lastTick||Date.now();
+if(!state.activityMastery)state.activityMastery={};
+if(!Number.isFinite(state.musicMasteryXP))state.musicMasteryXP=0;
+if(!Number.isInteger(state.masteryTier))state.masteryTier=masteryTier();
+const SAVE_FORMAT_VERSION=3;
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state));queueCloudSave()}catch(e){const status=document.getElementById("saveStatus");if(status)status.textContent="Browser storage unavailable. Export a backup to avoid losing progress.";}}
+function exportSave(){
+ regen();save();
+ const payload={game:"Encore",formatVersion:SAVE_FORMAT_VERSION,exportedAt:new Date().toISOString(),character:state};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),link=document.createElement("a");
+ link.href=url;link.download="encore-save-"+new Date().toISOString().slice(0,10)+".json";
+ document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ document.getElementById("saveStatus").textContent="Backup downloaded. Keep this JSON file somewhere safe.";
+}
+function migrateImportedSave(candidate){
+ if(!candidate||typeof candidate!=="object"||Array.isArray(candidate))throw Error("Backup does not contain a character object.");
+ const defaults=freshState();
+ const clean=JSON.parse(JSON.stringify(candidate));
+ // Earlier prototypes had fewer fields; retain their progress and add new defaults.
+ for(const [key,value] of Object.entries(defaults))if(clean[key]===undefined||clean[key]===null)clean[key]=value;
+ if(!clean.stats||typeof clean.stats!=="object"||Array.isArray(clean.stats))throw Error("No musical stats found in this backup.");
+ for(const k of Object.keys(defaults.stats)){
+   if(clean.stats[k]===undefined)clean.stats[k]=defaults.stats[k];
+   if(!Number.isFinite(clean.stats[k])||clean.stats[k]<0)throw Error("Invalid stat: "+k);
+ }
+ for(const key of ["cash","rep","xp","level","tech","creative"]){
+   if(!Number.isFinite(clean[key])||clean[key]<0)throw Error("Invalid "+key+" in backup.");
+ }
+ for(const key of ["inventory","gearOwned","activityMastery","completed"]){
+   if(!clean[key]||typeof clean[key]!=="object"||Array.isArray(clean[key]))clean[key]={};
+ }
+ if(!Array.isArray(clean.log))clean.log=[];
+ clean.log=clean.log.slice(0,300);
+ if(!Number.isFinite(clean.inspiration)||clean.inspiration<0)clean.inspiration=1000;
+ if(!Number.isFinite(clean.musicMasteryXP)||clean.musicMasteryXP<0)clean.musicMasteryXP=0;
+ if(!Number.isFinite(clean.inspirationSpentTraining)||clean.inspirationSpentTraining<0)clean.inspirationSpentTraining=0;
+ if(!Number.isInteger(clean.facilityTier)||clean.facilityTier<0)clean.facilityTier=0;
+ clean.facilityTier=Math.min(clean.facilityTier,FACILITIES.length-1);
+ for(const key of ["lastTick","lastTechTick","lastCreativeTick","lastInspirationTick"])
+   if(!Number.isFinite(clean[key])||clean[key]<=0)clean[key]=Date.now();
+ clean.inspirationFullStartV2=true;
+ return clean;
+}
+function readBackupFile(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onload=()=>resolve(String(reader.result||""));
+  reader.onerror=()=>reject(Error("The browser could not read the selected file."));
+  reader.readAsText(file);
+ });
+}
+let pendingSaveImport=null;
+function cancelSaveImport(){
+ pendingSaveImport=null;document.getElementById("importConfirmPanel").classList.add("hidden");
+ document.getElementById("saveStatus").textContent="Import canceled. Your current progress is unchanged.";
+}
+function confirmSaveImport(){
+ const status=document.getElementById("saveStatus");
+ if(!pendingSaveImport){status.textContent="No backup is awaiting confirmation. Select a file again.";return;}
+ try{
+  state=pendingSaveImport;pendingSaveImport=null;save();render();
+  document.getElementById("saveImportFile").value="";
+  document.getElementById("importConfirmPanel").classList.add("hidden");
+  status.textContent="Imported successfully! Your character progress has been restored.";toast("Save restored!");
+ }catch(e){status.textContent="Import failed: "+(e&&e.message?e.message:String(e));}
+}
+async function importSave(){
+ pendingSaveImport=null;document.getElementById("importConfirmPanel").classList.add("hidden");
+ const input=document.getElementById("saveImportFile"),status=document.getElementById("saveStatus");
+ const file=input&&input.files&&input.files[0];
+ if(!file){status.textContent="Choose your downloaded .json save file first.";return;}
+ status.textContent="Reading "+file.name+"…";
+ try{
+  if(file.size>5000000)throw Error("Backup exceeds the 5 MB limit.");
+  const parsed=JSON.parse((await readBackupFile(file)).replace(/^\uFEFF/,""));
+  if(!parsed||typeof parsed!=="object"||Array.isArray(parsed))throw Error("The backup must contain a JSON object.");
+  if(parsed.game!==undefined&&String(parsed.game).toLowerCase()!=="encore")throw Error("This file belongs to a different game.");
+  if(parsed.formatVersion!==undefined&&Number(parsed.formatVersion)>SAVE_FORMAT_VERSION)
+    throw Error("This backup is from a newer Encore version.");
+  const candidate=parsed.character||parsed.state||parsed.saveData||parsed.data||parsed;
+  const restored=migrateImportedSave(candidate);
+  pendingSaveImport=restored;
+  document.getElementById("importConfirmDescription").textContent="Restore backup: "+file.name+"? This replaces the current character. Download a backup of your current progress first if needed.";
+  document.getElementById("importConfirmPanel").classList.remove("hidden");
+  status.textContent="Backup validated. Confirm the import below to restore your character.";
+ }catch(e){status.textContent="Import failed: "+(e&&e.message?e.message:String(e));}
+}
+function regen(){
+ const now=Date.now();
+ const techInterval=600000; // +5 Technique every 10 minutes
+ const creativeInterval=300000; // +1 Creativity every 5 minutes
+ if(state.tech>=100){state.tech=100;state.lastTechTick=now;}
+ else {
+  const elapsed=Math.max(0,now-(state.lastTechTick||now));
+  const ticks=Math.floor(elapsed/techInterval);
+  if(ticks>0){state.tech=Math.min(100,state.tech+ticks*5);state.lastTechTick+=ticks*techInterval;}
+  if(state.tech>=100)state.lastTechTick=now;
+ }
+ if(state.creative>=creativityCap()){state.creative=creativityCap();state.lastCreativeTick=now;}
+ else {
+  const elapsed=Math.max(0,now-(state.lastCreativeTick||now));
+  const ticks=Math.floor(elapsed/creativeInterval);
+  if(ticks>0){state.creative=Math.min(creativityCap(),state.creative+ticks);state.lastCreativeTick+=ticks*creativeInterval;}
+  if(state.creative>=25)state.lastCreativeTick=now;
+ }
+ const inspirationInterval=300000; // +5 Inspiration every 5 minutes
+ if(state.inspiration>=INSPIRATION_CAP){state.lastInspirationTick=now;}
+ else {
+  const elapsed=Math.max(0,now-(state.lastInspirationTick||now));
+  const ticks=Math.floor(elapsed/inspirationInterval);
+  if(ticks>0){state.inspiration=Math.min(INSPIRATION_CAP,state.inspiration+ticks*5);state.lastInspirationTick+=ticks*inspirationInterval;}
+  if(state.inspiration>=INSPIRATION_CAP)state.lastInspirationTick=now;
+ }
+ state.lastTick=now;save();
+}
+function fmt(n){return Math.floor(n).toLocaleString("en-US")}
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function careerTitle(){if(state.level>=8)return "Touring Headliner";if(state.level>=6)return "Established Performer";if(state.level>=4)return "Working Musician";if(state.level>=2)return "Local Performer";return "Bedroom Musician"}
+function addLog(message){state.log.unshift({time:Date.now(),message});state.log=state.log.slice(0,60)}
+function toast(message){const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2100)}
+function levelCheck(){let leveled=false;while(state.xp>=state.level*100){state.xp-=state.level*100;state.level++;leveled=true;state.tech=Math.min(100,state.tech+15);state.creative=Math.min(creativityCap(),state.creative+3);state.cash+=100;addLog(`Level up! You reached career level ${state.level} and received $100 plus a resource refill.`)}if(leveled)toast("Career level up! Level "+state.level)}
+function inspirationMultiplier(value){
+ const points=[[0,.25],[100,1],[250,1.5],[500,2],[1000,3]];
+ for(let i=1;i<points.length;i++){
+  const [x1,y1]=points[i-1],[x2,y2]=points[i];
+  if(value<=x2)return y1+(value-x1)*(y2-y1)/(x2-x1);
+ }
+ return 3+Math.min(500,Math.max(0,value-1000))/500;
+}
+function buyItem(id){
+ regen();const item=ITEMS.find(i=>i.id===id);if(!item)return;
+ if(state.cash<item.price){toast("Not enough cash for this item.");return}
+ state.cash-=item.price;state.inventory[id]=(state.inventory[id]||0)+1;
+ addLog(`Bought ${item.name} for $${item.price}.`);save();render();toast(`Purchased ${item.name}!`);
+}
+function useItem(id){
+ regen();const item=ITEMS.find(i=>i.id===id);if(!item||!(state.inventory[id]>0))return;
+ const cap=item.booster?BOOSTED_CAP:INSPIRATION_CAP;
+ if(state.inspiration>=cap){toast(item.booster?"Already at the boosted limit.":"Inspiration is already at or above 1,000.");return}
+ const before=state.inspiration;
+ state.inspiration=Math.min(cap,state.inspiration+item.restore);
+ state.inventory[id]--;
+ if(state.inspiration>=INSPIRATION_CAP)state.lastInspirationTick=Date.now();
+ const gained=state.inspiration-before;
+ addLog(`Used ${item.name}: +${gained} Inspiration${state.inspiration>INSPIRATION_CAP?" (boosted!)":""}.`);
+ save();render();toast(`+${gained} Inspiration!`);
+}
+function itemCard(item){
+ const count=state.inventory[item.id]||0;
+ return `<article class="activity"><div class="activity-top"><div class="activity-icon">${item.icon}</div><div><div class="level">${item.booster?"Over-cap booster":"Recovery item"}</div><h3>${item.name}</h3><p>${item.desc}</p></div></div><div class="reward"><b>+${item.restore} Inspiration</b> · ${item.booster?"Up to 1,500":"Up to 1,000"}<br>Price: $${item.price.toLocaleString()} · Owned: ${count}</div><div class="activity-bottom"><button class="secondary" onclick="buyItem('${item.id}')" ${state.cash<item.price?"disabled":""}>Buy · $${item.price.toLocaleString()}</button><button onclick="useItem('${item.id}')" ${!count||state.inspiration>=(item.booster?BOOSTED_CAP:INSPIRATION_CAP)?"disabled":""}>Use (${count})</button></div></article>`;
+}
+// Long-term progression: at most 72 standard training sessions/day from natural Technique recovery.
+// Inspiration spent on training is cumulative and never resets when upgrading.
+const FACILITIES=[
+ {name:"Bedroom Practice Corner",threshold:0,icon:"🏠",bonuses:{rhythm:1.15,theory:.8,intonation:1,musicality:1.05}},
+ {name:"Community Rehearsal Room",threshold:250,icon:"🎹",bonuses:{rhythm:1.35,theory:1,intonation:1.1,musicality:1.25}},
+ {name:"Professional Practice Studio",threshold:2500,icon:"🎛️",bonuses:{rhythm:1.5,theory:1.2,intonation:1.65,musicality:1.4}},
+ {name:"City Music Academy",threshold:15000,icon:"🎼",bonuses:{rhythm:1.65,theory:2,intonation:1.8,musicality:1.7}},
+ {name:"Elite Conservatory",threshold:60000,icon:"🏛️",bonuses:{rhythm:2.05,theory:2.35,intonation:2.15,musicality:2.1}},
+ {name:"International Music Institute",threshold:250000,icon:"🌍",bonuses:{rhythm:2.45,theory:2.55,intonation:2.5,musicality:2.9}},
+ {name:"Legendary Virtuoso Hall",threshold:1000000,icon:"🏆",bonuses:{rhythm:3.2,theory:3.2,intonation:3.2,musicality:3.2}}
+];
+function facilityBonusGrid(f){return `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:12px 0">${Object.keys(STAT_INFO).map(k=>`<div style="padding:10px;border:1px solid var(--line);border-radius:10px;background:#152225"><div style="font-size:12px;color:var(--muted)">${STAT_INFO[k].name}</div><strong>${Math.round(f.bonuses[k]*100)}% gains</strong></div>`).join("")}</div>`;}
+function inspirationTrainingCost(){return 5;}
+function upgradeFacility(){
+ const next=FACILITIES[state.facilityTier+1];
+ if(!next||state.inspirationSpentTraining<next.threshold)return;
+ state.facilityTier++;addLog(`Practice facility upgraded to ${next.name}! Each musical stat now has its own training bonus.`);
+ save();render();toast(`Unlocked ${next.name}!`);
+}
+function facilityPanel(){
+ const current=FACILITIES[state.facilityTier],next=FACILITIES[state.facilityTier+1];
+ const spent=state.inspirationSpentTraining;
+ const progress=next?Math.min(100,spent/next.threshold*100):100;
+ return `<div style="border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:18px"><div class="section-head" style="margin:0 0 10px"><div><div class="eyebrow">Current practice facility</div><h2>${current.icon} ${current.name}</h2><p>Different skills grow at different rates here. Total Inspiration spent training: <strong>${fmt(spent)}</strong></p></div></div>${facilityBonusGrid(current)}${next?`<p style="font-size:13px;color:var(--muted)">Next: <strong>${next.name}</strong> · Unlock at ${fmt(next.threshold)} total Inspiration spent · ~${Math.ceil(Math.max(0,next.threshold-spent)/360).toLocaleString()} days at 72 sessions/day (natural Technique recovery)</p>${facilityBonusGrid(next)}<div class="meter"><span style="width:${progress}%;background:var(--green)"></span></div><div class="res-foot"><span>${fmt(spent)} / ${fmt(next.threshold)} Inspiration spent</span><span>${Math.max(0,next.threshold-spent)} remaining</span></div><button style="margin-top:12px" onclick="upgradeFacility()" ${spent<next.threshold?"disabled":""}>${spent>=next.threshold?`Upgrade to ${next.name} →`:`Upgrade locked`}</button>`:`<p style="color:var(--green)">You've unlocked the best available practice facility!</p>`}</div>`;
+}
+function train(stat){
+ regen();
+ if(state.tech<10){toast("Not enough Technique. Wait for it to regenerate.");return}
+ if(state.inspiration<5){toast("Not enough Inspiration. Wait for it to regenerate.");return}
+ const multiplier=inspirationMultiplier(state.inspiration);
+ const baseGain=rand(1,3);
+ const gain=Math.round(baseGain*multiplier*FACILITIES[state.facilityTier].bonuses[stat]*cityGearBonus(stat)*10)/10;
+ const inspirationCost=inspirationTrainingCost();
+ state.tech-=10;state.inspiration-=inspirationCost;state.inspirationSpentTraining+=inspirationCost;
+ if(state.inspiration<1000 && state.lastInspirationTick>Date.now())state.lastInspirationTick=Date.now();
+ state.stats[stat]=Math.round((state.stats[stat]+gain)*10)/10;
+ state.xp+=5;levelCheck();
+ addLog(`Training session: ${STAT_INFO[stat].name} increased by ${gain.toFixed(1)} (${Math.round(multiplier*100)}% Inspiration × ${Math.round(FACILITIES[state.facilityTier].bonuses[stat]*100)}% facility). (-10 Technique, -${inspirationCost} Inspiration, +5 XP)`);
+ save();render();
+}
+function activityChance(a){
+ const statScore=a.stats.reduce((sum,k)=>sum+state.stats[k],0)/a.stats.length;
+ const careerGap=state.level-a.level;
+ const creativityRatio=Math.min(1,creativityCap()/Math.max(a.cost*5,25));
+ const activitySkill=activityMasteryLevel(a.id)-1;
+ const categorySkill=categoryLevel(ACTIVITY_CATEGORY[a.id])-1;
+ // Even brand-new players can attempt a challenging gig, but the odds are steep.
+ const chance=.58+Math.min(.20,Math.log2(Math.max(1,statScore))*.035)
+   +Math.max(-.36,Math.min(.12,careerGap*.065))
+   +(creativityRatio-1)*.30
+   +Math.min(.15,activitySkill*.012)
+   +Math.min(.10,categorySkill*.008);
+ return Math.max(.03,Math.min(.97,chance));
+}
+function doActivity(id){
+ regen();const a=ACTIVITIES.find(x=>x.id===id);if(!a)return;
+ if(state.creative<a.cost){toast(`Need ${a.cost} Creativity to attempt this gig.`);return}
+ state.creative-=a.cost;
+ const statScore=a.stats.reduce((sum,k)=>sum+state.stats[k],0)/a.stats.length;
+ const chance=activityChance(a);
+ const success=Math.random()<chance;
+ if(success){
+   const cash=rand(...a.cash)+Math.floor(statScore*8);
+   const rep=rand(...a.rep);state.cash+=cash;state.rep+=rep;state.xp+=a.xp;
+   addLog(`${a.name} succeeded (${Math.round(chance*100)}% chance)! Earned $${cash}, ${rep} reputation, and ${a.xp} XP.`);
+   toast(`${a.name} success! +$${cash} · +${rep} rep`);
+ }else{
+   const consolation=rand(15,Math.max(20,Math.floor(a.cash[0]*.35)));state.cash+=consolation;state.xp+=Math.floor(a.xp/3);
+   addLog(`${a.name} failed (${Math.round(chance*100)}% chance). Earned $${consolation} and ${Math.floor(a.xp/3)} XP.`);
+   toast("Rough set—but every musician learns.");
+ }
+ tryActivityDrop(a,success);
+ const masteryGain=awardMastery(a,success);addLog(`${a.name}: +${masteryGain} mastery XP (activity level ${activityMasteryLevel(a.id)}).`);
+ levelCheck();save();render();
+}
+function statCard(key,training=false){
+ const s=STAT_INFO[key],v=state.stats[key],max=Math.max(25,Math.ceil(v/10)*10);
+ return `<article class="stat"><div class="stat-top"><h3>${s.name}</h3><span class="symbol">${s.icon}</span></div><div class="stat-num">${v.toFixed(1)}</div><small>Musical ability</small><div class="meter"><span style="width:${Math.min(100,v/max*100)}%;background:var(--green)"></span></div><div class="stat-desc">${s.desc}</div>${training?`<button onclick="train('${key}')" ${state.tech<10||state.inspiration<5?"disabled":""}>Train · 10 Technique + ${inspirationTrainingCost()} Inspiration</button>`:`<div style="font-size:11px;color:var(--muted)">Core stat</div>`}</article>`;
+}
+function activityCard(a){
+ const chance=Math.round(activityChance(a)*100);
+ const canAfford=state.creative>=a.cost;
+ return `<article class="activity"><div class="activity-top"><div class="activity-icon">${a.icon}</div><div><div class="level">${a.tier} · Mastery Lv ${activityMasteryLevel(a.id)} · Recommended career Lv ${a.level}</div><h3>${a.name}</h3><p>${a.desc}</p></div></div><div class="reward"><b>${a.cost} Creativity</b> · $${a.cash[0]}–$${a.cash[1]} base payout<br>Stats: ${a.stats.map(k=>STAT_INFO[k].name).join(" + ")} · ${a.xp} XP on success</div><div class="activity-bottom"><span class="pill">Estimated success: <strong>${chance}%</strong></span><button onclick="doActivity('${a.id}')" ${canAfford?"":"disabled"}>${canAfford?"Take gig →":"Need Creativity"}</button></div></article>`;
+}
+function render(){
+ regen();
+ document.getElementById("cash").textContent="$"+fmt(state.cash);
+ document.getElementById("rep").textContent=fmt(state.rep);
+ document.getElementById("tech").textContent=fmt(state.tech);
+ document.getElementById("creative").textContent=fmt(state.creative);
+ document.getElementById("inspiration").textContent=fmt(state.inspiration);
+ document.getElementById("inspirationBar").style.width=(Math.min(100,state.inspiration/1000*100))+"%";
+ document.getElementById("inspirationBar").style.background=state.inspiration>1000?"linear-gradient(90deg,#b58cff,#f0c7ff)":"";
+ document.getElementById("inspirationCap").textContent=state.inspiration>1000?" / 1,500 boosted":" / 1,000";
+ document.getElementById("techBar").style.width=(state.tech/100*100)+"%";
+ document.getElementById("creativeBar").style.width=(state.creative/creativityCap()*100)+"%";
+ document.getElementById("creativeCap").textContent=" / "+creativityCap();
+ document.getElementById("heroLevel").textContent=state.level;
+ document.getElementById("levelText").textContent="Level "+state.level;
+ document.getElementById("careerTitle").textContent=careerTitle();
+ document.getElementById("xpText").textContent=`${fmt(state.xp)} / ${state.level*100} XP`;
+ document.getElementById("xpBar").style.width=Math.min(100,state.xp/(state.level*100)*100)+"%";
+ document.getElementById("techRegen").textContent=state.tech>=100?"Full · +5 every 10 min":"+5 in "+Math.floor(Math.max(0,600000-(Date.now()-state.lastTechTick))/60000)+"m "+Math.floor((Math.max(0,600000-(Date.now()-state.lastTechTick))%60000)/1000)+"s";
+ document.getElementById("creativeRegen").textContent=state.creative>=creativityCap()?"Full · +1 every 5 min":"+1 in "+Math.floor(Math.max(0,300000-(Date.now()-state.lastCreativeTick))/60000)+"m "+Math.floor((Math.max(0,300000-(Date.now()-state.lastCreativeTick))%60000)/1000)+"s";
+ document.getElementById("inspirationRegen").textContent=state.inspiration>1000?"Boosted · no passive recovery":state.inspiration>=1000?"Full · +5 every 5 min":"+5 in "+Math.floor(Math.max(0,300000-(Date.now()-state.lastInspirationTick))/60000)+"m "+Math.floor((Math.max(0,300000-(Date.now()-state.lastInspirationTick))%60000)/1000)+"s";
+ renderCity();
+ document.getElementById("itemCards").innerHTML=ITEMS.map(itemCard).join("");
+ document.getElementById("foundItemCards").innerHTML=ACTIVITY_DROPS.map(foundItemCard).join("");
+ document.getElementById("overviewStats").innerHTML=Object.keys(STAT_INFO).map(k=>statCard(k)).join("");
+ document.getElementById("facilityPanel").innerHTML=facilityPanel();
+ document.getElementById("trainingStats").innerHTML=Object.keys(STAT_INFO).map(k=>statCard(k,true)).join("");
+ document.getElementById("featuredActivities").innerHTML=ACTIVITIES.slice(0,2).map(activityCard).join("");
+ document.getElementById("allActivities").innerHTML=masteryPanel()+categoryPanels();
+ document.getElementById("logCount").textContent=state.log.length+" events";
+ document.getElementById("logList").innerHTML=state.log.length?state.log.map(x=>`<div class="log-item"><span class="log-time">${new Date(x.time).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}</span><span class="log-message">${escapeHtml(x.message)}</span></div>`).join(""):'<p style="color:var(--muted)">No activity yet.</p>';
+ save();
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function showSection(section){
+ ["overview","training","items","activities","city","account","saves","log"].forEach(s=>document.getElementById(s+"Section").classList.toggle("hidden",s!==section));
+ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.section===section));
+}
+function clearLog(){state.log=[];save();render()}
+window.addEventListener("focus",()=>{regen();render()});
+
+// Supabase-backed beta accounts. Only the publishable key is used in the browser.
+let cloudClient=null,cloudUser=null,cloudMember=null,cloudPendingSave=null;
+let cloudLastJson="",cloudTimer=null,cloudBusy=false,cloudLoading=false,cloudAutoEnabled=false,cloudRetryTimer=null,cloudSaveAgain=false;
+const CLOUD_CFG_KEY="encore_beta_connection_v1";
+const CLOUD_AUTO_PREFIX="encore_auto_cloud_v1_";
+function cloudSyncStatus(msg){const el=document.getElementById("cloudSyncStatus");if(el)el.textContent=msg;}
+function cloudSetAutoSave(enabled){
+ if(enabled&&!cloudMember){document.getElementById("cloudAutoToggle").checked=false;cloudMessage("Sign in and join the beta before enabling automatic saves.");return;}
+ cloudAutoEnabled=enabled;
+ if(cloudUser)localStorage.setItem(CLOUD_AUTO_PREFIX+cloudUser.id,enabled?"yes":"no");
+ clearTimeout(cloudTimer);clearTimeout(cloudRetryTimer);
+ cloudSyncStatus(enabled?"Auto-save on · waiting for changes":"Automatic cloud saving is off.");
+ if(enabled)queueCloudSave();
+}
+function cloudMessage(message){const el=document.getElementById("cloudMessage");if(el)el.textContent=message;}
+function cloudStatus(){
+ document.getElementById("cloudIndicator").textContent=cloudMember?"☁ Connected":cloudUser?"Signed in · invite needed":cloudClient?"Server connected":"Offline demo";
+ document.getElementById("cloudAccountStatus").textContent=cloudMember?"Signed in as "+cloudMember.username+" · "+cloudUser.email:cloudUser?"Signed in as "+cloudUser.email+" · redeem an invite to unlock cloud saves":"Not signed in. Local gameplay remains available.";
+}
+async function connectCloud(){
+ const url=document.getElementById("cloudUrl").value.trim().replace(/\/$/,""),key=document.getElementById("cloudKey").value.trim();
+ if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)||!key){cloudMessage("Enter a valid Supabase project URL and publishable/anon key.");return;}
+ if(!window.supabase?.createClient){cloudMessage("Supabase library unavailable. Host Encore online and check your internet connection.");return;}
+ try{
+  cloudClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true}});
+  localStorage.setItem(CLOUD_CFG_KEY,JSON.stringify({url,key}));
+  document.getElementById("cloudConfigStatus").textContent="Connected";
+  const {data,error}=await cloudClient.auth.getUser();if(error)throw error;
+  cloudUser=data.user;await cloudRefreshMember();cloudMessage("Server configured. Sign in or redeem an invitation.");
+ }catch(e){cloudMessage("Connection issue: "+e.message)}cloudStatus();
+}
+async function cloudRefreshMember(){
+ cloudMember=null;
+ if(cloudClient&&cloudUser){
+  const {data,error}=await cloudClient.from("encore_profiles").select("user_id,username,created_at").eq("user_id",cloudUser.id).maybeSingle();
+  if(error)cloudMessage("Profile lookup: "+error.message);
+  else cloudMember=data;
+ }
+ cloudAutoEnabled=!!(cloudMember&&localStorage.getItem(CLOUD_AUTO_PREFIX+cloudUser.id)==="yes");
+ document.getElementById("cloudAutoToggle").checked=cloudAutoEnabled;
+ cloudSyncStatus(cloudAutoEnabled?"Auto-save on · changes will sync":"Automatic cloud saving is off.");
+ cloudStatus();
+}
+async function cloudAuth(mode){
+ if(!cloudClient){cloudMessage("Connect a Supabase server first.");return;}
+ const email=document.getElementById("cloudEmail").value.trim(),password=document.getElementById("cloudPassword").value;
+ if(!email||password.length<6){cloudMessage("Enter an email and password (at least 6 characters).");return;}
+ const {data,error}=mode==="signup"?await cloudClient.auth.signUp({email,password}):await cloudClient.auth.signInWithPassword({email,password});
+ if(error){cloudMessage(error.message);return;}
+ cloudUser=data.user||null;await cloudRefreshMember();
+ cloudMessage(mode==="signup"?"Sign-up requested. Check your email for a confirmation link if required, then sign in and redeem your invitation.":"Signed in. "+(cloudMember?"Your profile is connected.":"Redeem your invitation to activate your profile."));
+}
+async function cloudSignOut(){clearTimeout(cloudTimer);clearTimeout(cloudRetryTimer);cloudAutoEnabled=false;document.getElementById("cloudAutoToggle").checked=false;if(cloudClient)await cloudClient.auth.signOut();cloudUser=null;cloudMember=null;cloudLastJson="";cloudSyncStatus("Automatic cloud saving is off.");cloudStatus();cloudMessage("Signed out. Your local character is unchanged.");}
+async function redeemInvite(){
+ if(!cloudClient||!cloudUser){cloudMessage("Sign in before redeeming an invitation.");return;}
+ const invite_code=document.getElementById("cloudInvite").value.trim(),chosen_username=document.getElementById("cloudUsername").value.trim();
+ const {error}=await cloudClient.rpc("encore_join_beta",{invite_code,chosen_username});
+ if(error){cloudMessage("Invite not accepted: "+error.message);return;}
+ await cloudRefreshMember();cloudMessage("Welcome, "+chosen_username+"! Your profile is active. Upload your current character to create your first cloud save.");
+}
+function queueCloudSave(){
+ if(!cloudAutoEnabled||!cloudMember||cloudLoading)return;
+ if(JSON.stringify(state)===cloudLastJson)return;
+ if(cloudBusy){cloudSaveAgain=true;return;}
+ clearTimeout(cloudTimer);
+ cloudSyncStatus("Unsynced changes · saving shortly…");
+ cloudTimer=setTimeout(()=>cloudUpload(true),2500);
+}
+async function cloudUpload(silent=false){
+ if(!cloudClient||!cloudMember||!cloudUser){if(!silent)cloudMessage("Sign in and redeem an invitation before saving online.");return;}
+ if(cloudBusy){cloudSaveAgain=true;return;}
+ cloudBusy=true;clearTimeout(cloudTimer);clearTimeout(cloudRetryTimer);
+ const savingUser=cloudUser.id;
+ let failed=false;
+ const snapshot=JSON.stringify(state);
+ cloudSyncStatus("Saving to cloud…");
+ try{
+  const {error}=await cloudClient.from("encore_saves").upsert({user_id:savingUser,character:JSON.parse(snapshot),updated_at:new Date().toISOString()},{onConflict:"user_id"});
+  if(error)throw error;
+  if(cloudUser?.id===savingUser){cloudLastJson=snapshot;cloudSyncStatus("Saved to cloud · "+new Date().toLocaleTimeString());}
+  if(!silent)cloudMessage("Character saved to cloud successfully.");
+ }catch(e){
+  failed=true;
+  cloudSyncStatus("Cloud sync failed · local progress is still saved. Retrying…");
+  cloudMessage("Cloud save failed: "+e.message+". Export a local backup.");
+  if(cloudAutoEnabled)cloudRetryTimer=setTimeout(()=>queueCloudSave(),15000);
+ }finally{
+  cloudBusy=false;
+  if(!failed&&(cloudSaveAgain||cloudAutoEnabled&&JSON.stringify(state)!==cloudLastJson)){cloudSaveAgain=false;queueCloudSave();}
+ }
+}
+async function cloudPrepareDownload(){
+ if(!cloudClient||!cloudMember){cloudMessage("Sign in and redeem an invitation first.");return;}
+ const {data,error}=await cloudClient.from("encore_saves").select("character,updated_at").eq("user_id",cloudUser.id).maybeSingle();
+ if(error){cloudMessage("Cloud load failed: "+error.message);return;}
+ if(!data){cloudMessage("No cloud character found. Upload your current character first.");return;}
+ cloudPendingSave=data.character;
+ document.getElementById("cloudLoadConfirm").classList.remove("hidden");
+ cloudMessage("Cloud character found (saved "+new Date(data.updated_at).toLocaleString()+"). Confirm below to replace local progress.");
+}
+function cloudCancelDownload(){cloudPendingSave=null;document.getElementById("cloudLoadConfirm").classList.add("hidden");cloudMessage("Cloud load canceled. Local progress unchanged.");}
+function cloudConfirmDownload(){
+ if(!cloudPendingSave)return;
+ try{
+  cloudLoading=true;
+  const next=migrateImportedSave(cloudPendingSave);
+  if(!next)throw Error("Imported character could not be validated.");
+  state=next;
+  cloudLastJson=JSON.stringify(state);
+  localStorage.setItem(SAVE_KEY,cloudLastJson);
+  cloudSyncStatus("Cloud character restored · "+new Date().toLocaleTimeString());
+  cloudCancelDownload();render();cloudMessage("Cloud character loaded successfully.");
+ }catch(e){cloudMessage("Could not load cloud character: "+e.message)}finally{cloudLoading=false;}
+}
+async function cloudListProfiles(){
+ if(!cloudClient||!cloudMember){cloudMessage("Join the beta before browsing profiles.");return;}
+ const {data,error}=await cloudClient.from("encore_profiles").select("username,created_at").order("username").limit(100);
+ if(error){cloudMessage("Directory unavailable: "+error.message);return;}
+ document.getElementById("cloudProfiles").innerHTML="<strong>Beta musicians</strong>"+(data.length?"<ul>"+data.map(p=>"<li>🎵 "+escapeHtml(p.username)+"</li>").join("")+"</ul>":"<p>No profiles yet.</p>");
+}
+try{const cfg=JSON.parse(localStorage.getItem(CLOUD_CFG_KEY)||"null");if(cfg){document.getElementById("cloudUrl").value=cfg.url||"";document.getElementById("cloudKey").value=cfg.key||"";connectCloud()}}catch(e){}
+
+setInterval(()=>{regen();render()},15000);
+window.addEventListener("online",()=>{if(cloudAutoEnabled)queueCloudSave();});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&cloudAutoEnabled&&JSON.stringify(state)!==cloudLastJson)cloudUpload(true);});
+render();
+</script>
+</body>
+</html>
